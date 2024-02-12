@@ -84,7 +84,7 @@ function App() {
 
   const sendMessage = (text: string) => {
     const query = text;
-    setSearchTerm("");
+    setSearchTerm(text);
     const body = {
       user_request: query,
       ask_for: responseData?.ask_for,
@@ -271,16 +271,21 @@ function App() {
                 <img src={micImage} height={50} width={50} alt="" />
               </div>
               <div className="absolute bottom-2 w-[70%] text-center">
-                <p className="text-white flex justify-center gap-10 w-full">
+                <div className="text-white flex justify-center gap-10 w-full">
                   {responseData?.responce_data ? (
-                    <p className="flex gap-4">
+                    <div className="flex gap-4">
                       {responseData?.responce_data}
                       <Speech text={responseData?.responce_data} />
-                    </p>
-                  ) : (
+                    </div>
+                  ) : searchTerm.length > 0 ? (
                     searchTerm
+                  ) : (
+                    <div className="flex gap-4">
+                      {"Good Morning, How can I help you?"}
+                      <Speech text="Good Morning, How can I help you?" />
+                    </div>
                   )}
-                </p>
+                </div>
               </div>
             </div>
           </div>
